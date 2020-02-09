@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Sidebar class="home-sidebar" :stores="stores" />
-    <LeafMap class="home-map" :stores="stores" />
+    <Sidebar class="home-sidebar" :stores="stores" @click="clickHandler" />
+    <LeafMap class="home-map" :stores="stores" :target="target" />
     <Loading v-if="isLoading" />
   </div>
 </template>
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      target: {},
       stores: []
     }
   },
@@ -30,6 +31,11 @@ export default {
         this.stores = res.features
         this.isLoading = false
       })
+  },
+  methods: {
+    clickHandler(store) {
+      this.target = store
+    }
   }
 }
 </script>

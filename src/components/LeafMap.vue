@@ -38,6 +38,12 @@ export default {
       default: () => {
         return []
       }
+    },
+    target: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   data() {
@@ -54,9 +60,10 @@ export default {
         pointToLayer: this.setMarkerIcon,
         onEachFeature: (feature, layer) => {
           layer.bindPopup(this.setPopupInformation(feature.properties))
+          this.layers[feature.properties.id] = layer
         }
       },
-      keys: {}
+      layers: {}
     }
   },
   mounted() {
@@ -72,6 +79,13 @@ export default {
         })
       })
     })
+  },
+  watch: {
+    target(value) {
+      const { id } = value.properties
+      this.layers[id].openPopup()
+      console.log(L)
+    }
   },
   methods: {
     setMarkerIcon(feature, latlng) {

@@ -37,6 +37,7 @@
         class="sidebar-store"
         v-for="store in storesFilter"
         :key="store.properties.id"
+        @click="$emit('click', store)"
       >
         <div class="sidebar-store__title">
           {{ store.properties.name }}
