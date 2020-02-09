@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Noto+Sans+TC:400,500,700,900&subset=chinese-traditional');
+
+$font-family: 'Noto Sans TC', sans-serif;
+
+$colors: (
+  primary: #0c67ae,
+  primary-dark: #1e3757,
+  primary-light: #278ccd,
+  secondary: #1b8ea4,
+  grey: #dcdfe6,
+  grey-dark: #d3d3d3,
+  grey-light: #99a9bf,
+  red: #ff0000,
+  green: #f0f9eb,
+  white: #fff,
+  black: #000
+);
+
+@function color($color-item) {
+  @return map-get($colors, $color-item);
+}
+
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin backgroundImage($url) {
+  background-image: url($url);
+  @include bgi;
+}
+
+@mixin bgi {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+}
