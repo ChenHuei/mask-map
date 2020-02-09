@@ -4,16 +4,12 @@ $font-family: 'Noto Sans TC', sans-serif;
 
 $colors: (
   primary: #0c67ae,
-  primary-dark: #1e3757,
-  primary-light: #278ccd,
   secondary: #1b8ea4,
-  grey: #dcdfe6,
-  grey-dark: #d3d3d3,
-  grey-light: #99a9bf,
-  red: #ff0000,
-  green: #f0f9eb,
+  grey: #f6f6f6,
+  grey-text: #adadad,
   white: #fff,
-  black: #000
+  black: #000,
+  mask: rgba(0, 0, 0, 0.3)
 );
 
 @function color($color-item) {
@@ -25,10 +21,10 @@ $colors: (
   height: $h;
 }
 
-@mixin flexCenter {
+@mixin flexCenter($jc: center, $ai: center) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: $jc;
+  align-items: $ai;
 }
 
 @mixin backgroundImage($url) {
