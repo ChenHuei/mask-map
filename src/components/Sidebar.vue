@@ -141,6 +141,11 @@ export default {
     @include size(100%, auto);
     padding: 24px 16px;
     border-bottom: 2px solid color(grey);
+    cursor: pointer;
+
+    &:hover {
+      background-color: color(grey);
+    }
 
     &__title {
       margin-bottom: 8px;
