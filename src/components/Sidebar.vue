@@ -11,7 +11,7 @@
           :value="city"
         ></el-option>
       </el-select>
-      <el-select v-model="district">
+      <el-select v-model="district" placeholder="請選擇">
         <el-option
           v-for="district in AREA[city]"
           :key="district"
@@ -38,7 +38,9 @@
         v-for="store in storesFilter"
         :key="store.properties.id"
       >
-        <div class="sidebar-store__title">{{ store.properties.name }}</div>
+        <div class="sidebar-store__title">
+          {{ store.properties.name }}
+        </div>
         <a
           class="sidebar-store__description sidebar-store__address"
           target="_blank"
@@ -60,22 +62,27 @@
 <script>
 import Loading from '@/components/Loading'
 import { AREA } from '@/constants/area'
-import { GET_DATA_API } from '@/constants/api'
 import { MASK_TYPE } from '@/constants'
 
 export default {
   name: 'Sidebar',
   components: { Loading },
+  props: {
+    stores: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
   data() {
     return {
       isLoading: false,
       city: '台北市',
       district: '',
       type: 'mask',
-      stores: [],
       MASK_TYPE,
-      AREA,
-      GET_DATA_API
+      AREA
     }
   },
   computed: {
@@ -92,15 +99,6 @@ export default {
         return item.properties[this.type] > 0 ? acc + 1 : acc
       }, 0)
     }
-  },
-  mounted() {
-    this.isLoading = true
-    fetch(GET_DATA_API)
-      .then(res => res.json())
-      .then(res => {
-        this.stores = res.features
-        this.isLoading = false
-      })
   },
   methods: {
     resetDistrict() {

@@ -1,17 +1,36 @@
 <template>
   <div class="home">
-    <Sidebar class="home-sidebar" />
-    <LeafMap class="home-map" />
+    <Sidebar class="home-sidebar" :stores="stores" />
+    <LeafMap class="home-map" :stores="stores" />
+    <Loading v-if="isLoading" />
   </div>
 </template>
 
 <script>
+import { GET_DATA_API } from '@/constants/api'
 import Sidebar from '@/components/Sidebar'
 import LeafMap from '@/components/LeafMap'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'Home',
-  components: { Sidebar, LeafMap }
+  components: { Sidebar, LeafMap, Loading },
+  data() {
+    return {
+      isLoading: false,
+      stores: []
+    }
+  },
+
+  mounted() {
+    this.isLoading = true
+    fetch(GET_DATA_API)
+      .then(res => res.json())
+      .then(res => {
+        this.stores = res.features
+        this.isLoading = false
+      })
+  }
 }
 </script>
 
