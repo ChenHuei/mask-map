@@ -1,11 +1,33 @@
 <template>
   <div class="home">
-    <h2>Home</h2>
+    <Sidebar class="home-sidebar" />
+    <LeafMap class="home-map" />
   </div>
 </template>
 
 <script>
+import Sidebar from '@/components/Sidebar'
+import LeafMap from '@/components/LeafMap'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: { Sidebar, LeafMap }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/styles/imports';
+
+.home {
+  @include size(100%);
+  @include flexCenter;
+
+  &-sidebar {
+    @include size(320px, 100%);
+  }
+
+  &-map {
+    @include size(calc(100% - 320px), 100%);
+  }
+}
+</style>
